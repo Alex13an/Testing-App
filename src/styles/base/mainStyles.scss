@@ -13,3 +13,14 @@ body {
   position: relative;
   overflow-x: hidden;
 }
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+input {
+  &:focus {
+    outline: none;
+  }
+}

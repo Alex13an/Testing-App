@@ -1,0 +1,30 @@
+.test-card {
+  display: flex;
+  border-radius: 10px;
+  padding: 25px 50px;
+  background: rgba($color: #dfe6e9, $alpha: 0.3);
+  margin: 20px 0px;
+  box-shadow: 1px 1px 7px 0px rgba(34, 60, 80, 0.2);
+  transition: transform 0.25s ease;
+  cursor: pointer;
+  position: relative;
+  &:hover {
+    transform: translateY(-5px);
+  }
+  &__title {
+    font-size: 17px;
+    color: var(--dark-grey);
+  }
+  &__content {
+    margin-left: 15px;
+  }
+  &__category {
+    color: var(--grey);
+  }
+  &__passed {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 17px;
+  }
+}

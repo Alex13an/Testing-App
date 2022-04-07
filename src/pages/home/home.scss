@@ -1,0 +1,35 @@
+#components-layout-demo-fixed .logo {
+  float: left;
+  width: 120px;
+  height: 31px;
+  margin: 16px 24px 16px 0;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.tests {
+  margin: 0 10px;
+  &__settings {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  &__view {
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 5px;
+  }
+  &__filters {
+    * {
+      margin-right: 5px;
+    }
+  }
+  &__view-switchers {
+    padding: 0 5px;
+  }
+}
