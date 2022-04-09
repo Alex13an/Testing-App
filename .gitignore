@@ -1,2 +1,5 @@
 build
 node_modules
+client/build
+client/node_modules
+.env
