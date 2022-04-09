@@ -20,12 +20,13 @@ const UserTest = sequelize.define('user_test', {
 const Test = sequelize.define('test', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
   title: {type: DataTypes.STRING, unique: true, allowNull: false},
-  description: {type: DataTypes.STRING},
+  description: {type: DataTypes.TEXT},
   rating: {type: DataTypes.INTEGER, defaultValue: 0},
 })
 
 const Category = sequelize.define('category', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+  name: {type: DataTypes.STRING, allowNull: false, unique: true}
 })
 
 const Question = sequelize.define('question', {
@@ -52,10 +53,10 @@ Test.belongsTo(UserTest)
 Category.hasMany(Test)
 Test.belongsTo(Category)
 
-Test.hasMany(Question)
+Test.hasMany(Question, {as: 'questions'})
 Question.belongsTo(Test)
 
-Test.hasMany(Result)
+Test.hasMany(Result, {as: 'results'})
 Result.belongsTo(Test)
 
 module.exports = {
