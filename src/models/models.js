@@ -15,6 +15,7 @@ const PassedTests = sequelize.define('passed_tests', {
 
 const UserTest = sequelize.define('user_test', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
+  result: {type: DataTypes.INTEGER, allowNull: false}
 })
 
 const Test = sequelize.define('test', {
@@ -44,11 +45,11 @@ const Result = sequelize.define('result', {
 User.hasOne(PassedTests)
 PassedTests.belongsTo(User)
 
-PassedTests.hasMany(UserTest)
+PassedTests.hasMany(UserTest, {as: 'userTests'})
 UserTest.belongsTo(PassedTests)
 
-UserTest.hasOne(Test)
-Test.belongsTo(UserTest)
+Test.hasOne(UserTest)
+UserTest.belongsTo(Test)
 
 Category.hasMany(Test)
 Test.belongsTo(Category)
