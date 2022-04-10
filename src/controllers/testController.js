@@ -13,7 +13,6 @@ class TestController {
       })
 
       if(questions) {
-        questions = JSON.parse(questions)
         questions.forEach(i => {
           Question.create({
             body: i.body,
@@ -24,7 +23,6 @@ class TestController {
       }
 
       if(results) {
-        results = JSON.parse(results)
         results.forEach(i => {
           Result.create({
             body: i.body,

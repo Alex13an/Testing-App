@@ -22,28 +22,28 @@ const Home: FC = () => {
       <div className="tests__settings">
         <div className="tests__filters">
           <Dropdown overlay={menu}>
-            <button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
               Фильтр <DownOutlined />
-            </button>
+            </a>
           </Dropdown>
           <Dropdown overlay={menu}>
-            <button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
               Сортировка <DownOutlined />
-            </button>
+            </a>
           </Dropdown>
           <Dropdown overlay={menu}>
-            <button className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
               Категория <DownOutlined />
-            </button>
+            </a>
           </Dropdown>
         </div>
         <div className="tests__view-switchers">
-          <button className="tests__view test__view_list">
+          <a className="tests__view test__view_list">
             <UnorderedListOutlined />
-          </button>
-          <button className="tests__view test__view_tiles">
+          </a>
+          <a className="tests__view test__view_tiles">
             <AppstoreOutlined />
-          </button>
+          </a>
         </div>
       </div>
       <div className="tests__list">
