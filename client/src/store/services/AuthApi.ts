@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { IUser } from './../../models/IUser'
+import { IUser } from '../../models/appModels'
 import { RootState } from '..'
 
 export const authApi = createApi({
@@ -22,20 +22,14 @@ export const authApi = createApi({
         url: '/auth',
       }),
     }),
-    userRegister: build.mutation<
-      { token: string; error: undefined } | { token: undefined; error: string },
-      IUser
-    >({
+    userRegister: build.mutation<{ token: string }, IUser>({
       query: user => ({
         url: '/registration',
         method: 'POST',
         body: user,
       }),
     }),
-    userLogin: build.mutation<
-      { token: string; error: undefined } | { token: undefined; error: string },
-      IUser
-    >({
+    userLogin: build.mutation<{ token: string }, IUser>({
       query: user => ({
         url: '/login',
         method: 'POST',

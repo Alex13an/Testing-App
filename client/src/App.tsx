@@ -19,6 +19,7 @@ const App: FC = () => {
       dispatch(setUser(JSON.parse(user)))
     }
   })
+
   return (
     <>
       <Layout>

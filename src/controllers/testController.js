@@ -38,6 +38,39 @@ class TestController {
     }
   }
 
+  async addContent(req, res, next) {
+    try {
+      let {id, questions, results} = req.body
+
+      const test = await Test.findOne({where: {id}})
+      if(!test) return
+
+      if(questions) {
+        questions.forEach(i => {
+          Question.create({
+            body: i.body,
+            scale: i.scale,
+            testId: test.id
+          })
+        })
+      }
+
+      if(results) {
+        results.forEach(i => {
+          Result.create({
+            body: i.body,
+            breach: i.breach,
+            testId: test.id
+          })
+        })
+      }
+
+      return res.json({questions, results})
+    } catch(err) {
+      next(ApiError.badRequest(err.message))
+    }
+  }
+
   async getAll(req, res) {
     let {categoryId, limit, page} = req.query
     page = page || 1

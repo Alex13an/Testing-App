@@ -38,7 +38,7 @@ const Question = sequelize.define('question', {
 
 const Result = sequelize.define('result', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-  body: {type: DataTypes.STRING, allowNull: false},
+  body: {type: DataTypes.TEXT, allowNull: false},
   breach: {type: DataTypes.INTEGER, allowNull: false}
 })
 

@@ -6,6 +6,7 @@ import { useSearchParams, Link, useNavigate } from 'react-router-dom'
 import { authApi } from '../../store/services/AuthApi'
 import { useAppDispatch } from './../../hooks/storeHooks'
 import { setUser } from '../../store/reducers/authSlice'
+import decode from 'jwt-decode'
 
 interface authData {
   email: string
@@ -13,32 +14,38 @@ interface authData {
 }
 
 const Auth: FC = () => {
-  const [query, setQuery] = useSearchParams()
+  const [query] = useSearchParams()
   const mode = query.get('auth')
-  const [userReg, { isLoading: regLoading }] = authApi.useUserRegisterMutation()
-  const [userLogin, { isLoading: logLoading }] = authApi.useUserLoginMutation()
+  const [userReg, {}] = authApi.useUserRegisterMutation()
+  const [userLogin, {}] = authApi.useUserLoginMutation()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const onFinish = async (values: authData) => {
     if (!values.password || !values.email) return
     try {
-      let response: { token: string; error: undefined } | { token: undefined; error: string }
+      let response: { token: string }
       if (mode === 'login') {
         response = await userLogin({ email: values.email, password: values.password }).unwrap()
       } else {
         response = await userReg({ email: values.email, password: values.password }).unwrap()
       }
       if (response.token) {
+        const decodedUser: { role: 'USER' | 'ADMIN' } = decode(response.token) || { role: 'USER' }
         dispatch(
-          setUser({ email: values.email, isAuth: true, role: 'USER', token: response.token }),
+          setUser({
+            email: values.email,
+            isAuth: true,
+            role: decodedUser.role,
+            token: response.token,
+          }),
         )
         localStorage.setItem(
           'user',
           JSON.stringify({
             email: values.email,
             isAuth: true,
-            role: 'USER',
+            role: decodedUser.role,
             token: response.token,
           }),
         )
