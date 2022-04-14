@@ -1,0 +1,18 @@
+.big-button {
+  border: 2px solid var(--nice-green);
+  background: none;
+  width: 30%;
+  height: 50px;
+  transition: background 0.5s ease, opacity 0.5s ease, border-color 0.5s ease;
+  cursor: pointer;
+  font-size: 16px;
+  &:hover {
+    background: var(--nice-green);
+  }
+  &_disabled {
+    cursor: default;
+    border-color: var(--grey);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

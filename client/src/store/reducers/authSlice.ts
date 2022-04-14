@@ -5,6 +5,7 @@ interface authState {
   email: string
   role: 'ADMIN' | 'USER'
   token: string
+  userId: number
 }
 
 const initialState: authState = {
@@ -12,6 +13,7 @@ const initialState: authState = {
   email: '',
   role: 'USER',
   token: '',
+  userId: 0,
 }
 
 export const authSlice = createSlice({
@@ -23,6 +25,7 @@ export const authSlice = createSlice({
       state.role = action.payload.role
       state.email = action.payload.email
       state.token = action.payload.token
+      state.userId = action.payload.userId
     },
   },
 })

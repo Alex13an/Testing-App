@@ -31,13 +31,17 @@ const Auth: FC = () => {
         response = await userReg({ email: values.email, password: values.password }).unwrap()
       }
       if (response.token) {
-        const decodedUser: { role: 'USER' | 'ADMIN' } = decode(response.token) || { role: 'USER' }
+        const decodedUser: { role: 'USER' | 'ADMIN'; id: number } = decode(response.token) || {
+          role: 'USER',
+          id: 0,
+        }
         dispatch(
           setUser({
             email: values.email,
             isAuth: true,
             role: decodedUser.role,
             token: response.token,
+            userId: decodedUser.id,
           }),
         )
         localStorage.setItem(
@@ -47,6 +51,7 @@ const Auth: FC = () => {
             isAuth: true,
             role: decodedUser.role,
             token: response.token,
+            userId: decodedUser.id,
           }),
         )
         navigate('/')

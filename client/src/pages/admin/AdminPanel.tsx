@@ -6,6 +6,7 @@ import CategorySelector from './../../components/categorySelector/CategorySelect
 import { IQuestion, IResult } from '../../models/appModels'
 import { DeleteOutlined } from '@ant-design/icons'
 import { testsApi } from '../../store/services/TestsApi'
+import Loader from '../../components/loader/Loader'
 const { TextArea } = Input
 
 const AdminPanel: FC = () => {
@@ -74,7 +75,7 @@ const AdminPanel: FC = () => {
     }
   }
 
-  if (catLoading) return <div>Loading...</div>
+  if (catLoading) return <Loader />
 
   return (
     <>

@@ -12,7 +12,9 @@ const MainHeader: FC = () => {
   }
   const menu = (
     <Menu>
-      <Menu.Item key={1}>Профиль</Menu.Item>
+      <Menu.Item key={1}>
+        <Link to={'/user'}>Профиль</Link>
+      </Menu.Item>
       <Menu.Item key={2} onClick={removeToken}>
         <a href="/">Выход</a>
       </Menu.Item>

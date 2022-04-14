@@ -34,7 +34,6 @@ class PassedTestsController {
       })
 
       if(tests) {
-        tests = JSON.parse(tests)
         tests.forEach(i => {
           UserTest.create({
             result: i.result,
@@ -45,8 +44,7 @@ class PassedTestsController {
       }
 
       return res.json({
-        passedTests, 
-        tests
+        success: true
       })
     } catch(err) {
       next(ApiError.badRequest(err.message))

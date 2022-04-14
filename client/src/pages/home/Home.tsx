@@ -7,6 +7,7 @@ import { testsApi } from '../../store/services/TestsApi'
 import { categoryApi } from '../../store/services/CategoryApi'
 import { TestParams } from '../../models/fetchModels'
 import CategorySelector from './../../components/categorySelector/CategorySelector'
+import Loader from '../../components/loader/Loader'
 
 const Home: FC = () => {
   const [testParams /*, setTestParams*/] = useState<TestParams>({
@@ -32,7 +33,7 @@ const Home: FC = () => {
     </Menu>
   )
 
-  if (isLoading || catLoading) return <div>Loading...</div>
+  if (isLoading || catLoading) return <Loader />
 
   return (
     <div className="tests">
@@ -72,6 +73,7 @@ const Home: FC = () => {
           <TestCard
             key={test.id}
             category={categories?.find(cat => cat.id === test.categoryId)?.name || 'Другое'}
+            categoryId={test.categoryId}
             description={test.description}
             id={test.id}
             rating={test.rating}

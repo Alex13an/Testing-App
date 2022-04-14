@@ -8,6 +8,7 @@
   transition: transform 0.25s ease;
   cursor: pointer;
   position: relative;
+  align-items: center;
   &:hover {
     transform: translateY(-5px);
   }
