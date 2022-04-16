@@ -48,7 +48,7 @@ PassedTests.belongsTo(User)
 PassedTests.hasMany(UserTest, {as: 'userTests'})
 UserTest.belongsTo(PassedTests)
 
-Test.hasOne(UserTest)
+Test.hasMany(UserTest)
 UserTest.belongsTo(Test)
 
 Category.hasMany(Test)

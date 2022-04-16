@@ -16,7 +16,7 @@ app.use('/api', router)
 app.use(errorHandling)
 
 app.get('/', (req, res) => {
-  res.status(200).json({message: 'FUCK YOU!'})
+  res.status(200).json({message: 'Working!'})
 })
 
 const start = async () => {

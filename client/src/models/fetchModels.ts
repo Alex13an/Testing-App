@@ -11,5 +11,20 @@ export interface PassedTest {
 
 export interface PassedTests {
   user: number
-  tests: PassedTest[]
+  test: PassedTest
+}
+
+export interface PassedTestsUser {
+  userId: number
+  userTests: {
+    testId: number
+  }[]
+}
+
+export interface CleanPassedTest {
+  testId: number
+  title: string
+  description: string
+  result: string
+  categoryId: number
 }

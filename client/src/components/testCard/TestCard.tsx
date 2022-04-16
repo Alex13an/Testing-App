@@ -3,11 +3,7 @@ import './testCard.scss'
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { Avatar } from 'antd'
-import category1 from '../../assets/images/categories/category-1.svg'
-import category2 from '../../assets/images/categories/category-2.svg'
-import category3 from '../../assets/images/categories/category-3.svg'
-import category4 from '../../assets/images/categories/category-4.svg'
-import category5 from '../../assets/images/categories/category-5.svg'
+import getCategoryImage from '../../utils/getCategoryImage'
 
 interface TestCardProps {
   id: number
@@ -19,8 +15,6 @@ interface TestCardProps {
   passed?: boolean
 }
 
-const catImg = [category1, category2, category3, category4, category5]
-
 const TestCard: FC<TestCardProps> = ({ id, category, categoryId, title, passed }) => {
   return (
     <Link to={`/${id}`}>
@@ -28,12 +22,7 @@ const TestCard: FC<TestCardProps> = ({ id, category, categoryId, title, passed }
         <div className="test-card__image">
           <Avatar
             size="large"
-            icon={
-              <img
-                src={categoryId > catImg.length ? catImg[0] : catImg[categoryId - 1]}
-                alt={'test-category'}
-              />
-            }
+            icon={<img src={getCategoryImage(categoryId)} alt={'test-category'} />}
           />
         </div>
         <div className="test-card__content">

@@ -8,8 +8,11 @@ import { categoryApi } from '../../store/services/CategoryApi'
 import { TestParams } from '../../models/fetchModels'
 import CategorySelector from './../../components/categorySelector/CategorySelector'
 import Loader from '../../components/loader/Loader'
+import { useAppSelector } from '../../hooks/storeHooks'
+import { passedTestsApi } from '../../store/services/PassedTestsApi'
 
 const Home: FC = () => {
+  const { userId } = useAppSelector(state => state.RootReducer.authSlice)
   const [testParams /*, setTestParams*/] = useState<TestParams>({
     limit: undefined,
     page: undefined,
@@ -21,6 +24,9 @@ const Home: FC = () => {
     page: testParams.page,
   })
   const { isLoading: catLoading, data: categories } = categoryApi.useFetchAllCategoriesQuery(null)
+  const { data: passedTests, isLoading: passedLoading } = passedTestsApi.useFetchPassedTestQuery({
+    userId,
+  })
 
   const onClick = () => {
     message.info(`Click on item key`)
@@ -33,7 +39,7 @@ const Home: FC = () => {
     </Menu>
   )
 
-  if (isLoading || catLoading) return <Loader />
+  if (isLoading || catLoading || passedLoading) return <Loader />
 
   return (
     <div className="tests">
@@ -78,6 +84,7 @@ const Home: FC = () => {
             id={test.id}
             rating={test.rating}
             title={test.title}
+            passed={passedTests?.userTests.some(t => t.testId === test.id) || false}
           />
         ))}
       </div>

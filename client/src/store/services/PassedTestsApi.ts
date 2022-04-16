@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { RootState } from '..'
-import { PassedTests } from '../../models/fetchModels'
+import { CleanPassedTest, PassedTests, PassedTestsUser } from '../../models/fetchModels'
 
 export const passedTestsApi = createApi({
   reducerPath: 'passedTestsApi',
+  tagTypes: ['passed'],
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/passed',
     prepareHeaders: (headers, { getState }) => {
@@ -17,27 +18,43 @@ export const passedTestsApi = createApi({
     },
   }),
   endpoints: build => ({
-    // fetchAllTests: build.query<ITests, TestParams>({
-    //   query: ({ categoryId, limit, page }) => ({
-    //     url: '/',
-    //     params: {
-    //       categoryId,
-    //       limit,
-    //       page,
-    //     },
-    //   }),
-    // }),
-    // fetchTest: build.query<ITestFull, { id: number }>({
-    //   query: ({ id }) => ({
-    //     url: `/${id}`,
-    //   }),
-    // }),
+    getAllPassedTests: build.query<CleanPassedTest[], { userId: number }>({
+      query: ({ userId }) => ({
+        url: '/',
+        params: {
+          userId,
+        },
+      }),
+    }),
+    checkPassedTest: build.query<
+      { check: boolean; result: number },
+      { userId: number; testId: number }
+    >({
+      query: ({ userId, testId }) => ({
+        url: `/test`,
+        params: {
+          userId,
+          testId,
+        },
+      }),
+      providesTags: ['passed'],
+    }),
+    fetchPassedTest: build.query<PassedTestsUser, { userId: number }>({
+      query: ({ userId }) => ({
+        url: `/user`,
+        params: {
+          userId,
+        },
+      }),
+      providesTags: ['passed'],
+    }),
     addPassedTests: build.mutation<{ success: boolean }, PassedTests>({
       query: test => ({
         url: '/',
         method: 'POST',
         body: test,
       }),
+      invalidatesTags: ['passed'],
     }),
   }),
 })

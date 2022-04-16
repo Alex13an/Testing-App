@@ -4,8 +4,8 @@ const passedTestsController = require('../controllers/passedTestsController')
 
 router.post('/', passedTestsController.addPassed)
 router.get('/', passedTestsController.getAll)
-router.get('/:id', passedTestsController.getOne)
-
+router.get('/user', passedTestsController.getOne)
+router.get('/test', passedTestsController.checkPass)
 
 
 module.exports = router
