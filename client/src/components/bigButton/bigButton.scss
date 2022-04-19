@@ -6,6 +6,10 @@
   transition: background 0.5s ease, opacity 0.5s ease, border-color 0.5s ease, width .5s ease;
   cursor: pointer;
   font-size: 16px;
+  margin-top: 50px;
+  @media screen and (max-width: 600px) {
+    margin-top: 20px;
+  }
   &:hover {
     background: var(--nice-green);
   }

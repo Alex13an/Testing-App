@@ -94,7 +94,6 @@ const Test: FC = () => {
         )}
       </h2>
       <Avatar
-        style={{ marginBottom: '50px' }}
         size={200}
         icon={<img src={getCategoryImage(data?.categoryId || 1)} alt={'test-category'} />}
       />

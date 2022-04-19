@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import './auth.scss'
 import { Form, Input, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
@@ -14,6 +14,7 @@ interface authData {
 }
 
 const Auth: FC = () => {
+  const [buttonLoading, setButtonLoading] = useState(false)
   const [query] = useSearchParams()
   const mode = query.get('auth')
   const [userReg, {}] = authApi.useUserRegisterMutation()
@@ -23,12 +24,17 @@ const Auth: FC = () => {
 
   const onFinish = async (values: authData) => {
     if (!values.password || !values.email) return
+    setButtonLoading(true)
     try {
       let response: { token: string }
       if (mode === 'login') {
         response = await userLogin({ email: values.email, password: values.password }).unwrap()
       } else {
-        response = await userReg({ email: values.email, password: values.password, role: 'USER' }).unwrap()
+        response = await userReg({
+          email: values.email,
+          password: values.password,
+          role: 'USER',
+        }).unwrap()
       }
       if (response.token) {
         const decodedUser: { role: 'USER' | 'ADMIN'; id: number } = decode(response.token) || {
@@ -44,6 +50,7 @@ const Auth: FC = () => {
             userId: decodedUser.id,
           }),
         )
+        localStorage.removeItem('user')
         localStorage.setItem(
           'user',
           JSON.stringify({
@@ -85,7 +92,12 @@ const Auth: FC = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="login-form-button"
+            loading={buttonLoading}
+          >
             {mode === 'login' ? 'Sign in' : 'Sign Up'}
           </Button>
           Or{' '}

@@ -1,5 +1,6 @@
 const { Test, Question, Result } = require('../models/models')
 const ApiError = require('../utils/ApiError')
+const { Op } = require('sequelize')
 
 class TestController {
   async create(req, res, next) {
@@ -106,6 +107,33 @@ class TestController {
       } 
     )
     return res.json(test)
+  }
+
+  async getSearched(req, res, next) {
+    try {
+      let {searchValue, limit} = req.query
+      const tests = await Test.findAll({where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: `%${searchValue}%`
+            }
+          },
+          {
+            title: {
+              [Op.match]: `%${searchValue}%`
+            }
+          },
+        ]
+      }, attributes: [
+        'id', 'title'
+      ], limit})
+
+      return res.json(tests)
+    } catch (err) {
+
+      next(ApiError.badRequest(err.message))
+    }
   }
 }
 

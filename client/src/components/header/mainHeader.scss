@@ -21,38 +21,6 @@
     display: flex;
     align-items: center;
   }
-  &__search {
-    color: white;
-  }
-  &__input {
-    background: none;
-    border: 1px solid var(--light-grey);
-    border-radius: 5px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    border-right: none;
-    padding: 5px 10px;
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
-    &:hover,
-    &:focus {
-      opacity: 1;
-    }
-  }
-  &__input-submit {
-    padding: 5px 10px;
-    background: none;
-    border: 1px solid var(--light-grey);
-    border-radius: 5px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    cursor: pointer;
-    transition: color 0.5s ease;
-    &:hover,
-    &:active {
-      color: #00b894;
-    }
-  }
   &__login {
     color: var(--light-grey);
     font-size: 23px;

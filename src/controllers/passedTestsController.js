@@ -89,7 +89,7 @@ class PassedTestsController {
       })
 
       if(test) {
-        const already = await UserTest.findOne({where: {testId: test.testId}})
+        const already = await UserTest.findOne({where: {testId: test.testId, passedTestId: passedTests.id}})
         if(already) return next(ApiError.badRequest('User already has passed this test!'))
 
         UserTest.create({

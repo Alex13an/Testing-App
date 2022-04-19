@@ -19,6 +19,9 @@
     &:hover {
       opacity: 1;
     }
+    @media (max-width: 800px) {
+      display: none;
+    }
   }
   &__check {
     color: var(--nice-green);
@@ -42,12 +45,19 @@
     font-size: 17px;
     max-width: 80%;
     margin-bottom: 35px;
+    @media screen and (max-width: 600px) {
+      margin-top: 20px;
+    }
   }
   &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 35px;
+    margin-top: 50px;
+    @media screen and (max-width: 600px) {
+      margin-top: 20px;
+    }
   }
 }
 

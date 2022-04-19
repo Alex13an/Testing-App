@@ -35,6 +35,18 @@ export const testsApi = createApi({
         url: `/${id}`,
       }),
     }),
+    searchTests: build.query<
+      { id: number; title: string }[],
+      { searchValue: string; limit: number }
+    >({
+      query: ({ limit, searchValue }) => ({
+        url: '/search',
+        params: {
+          limit,
+          searchValue,
+        },
+      }),
+    }),
     createTest: build.mutation<ITest, ITestCreate>({
       query: test => ({
         url: '/',

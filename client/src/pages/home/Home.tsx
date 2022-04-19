@@ -48,14 +48,14 @@ const Home: FC = () => {
           />
           <SortSelector sort={sort} setSort={setSort} />
         </div>
-        <div className="tests__view-switchers">
-          <a className="tests__view test__view_list">
-            <UnorderedListOutlined />
-          </a>
-          <a className="tests__view test__view_tiles">
-            <AppstoreOutlined />
-          </a>
-        </div>
+        {/* <div className="tests__view-switchers"> */}
+        {/*   <a className="tests__view test__view_list"> */}
+        {/*     <UnorderedListOutlined /> */}
+        {/*   </a> */}
+        {/*   <a className="tests__view test__view_tiles"> */}
+        {/*     <AppstoreOutlined /> */}
+        {/*   </a> */}
+        {/* </div> */}
       </div>
       <div className="tests__list">
         {tests?.rows.map(test => (

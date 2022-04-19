@@ -1,14 +1,15 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { SearchOutlined, UserOutlined } from '@ant-design/icons'
+import { UserOutlined } from '@ant-design/icons'
 import './mainHeader.scss'
 import { useAppSelector } from '../../hooks/storeHooks'
 import { Menu, Dropdown } from 'antd'
+import SearchBar from '../searchBar/SearchBar'
 
 const MainHeader: FC = () => {
   const { isAuth, role } = useAppSelector(state => state.RootReducer.authSlice)
   const removeToken = () => {
-    localStorage.removeItem('user')
+    localStorage.clear()
   }
   const menu = (
     <Menu>
@@ -32,12 +33,7 @@ const MainHeader: FC = () => {
         Testicon
       </Link>
       <div className="main-header__menu">
-        <div className="main-header__search">
-          <input className="main-header__input" type="text" placeholder="Найти тест..." />
-          <button className="main-header__input-submit">
-            <SearchOutlined />
-          </button>
-        </div>
+        <SearchBar />
         {isAuth ? (
           <Dropdown overlay={menu} placement="bottomRight" arrow={{ pointAtCenter: true }}>
             <div

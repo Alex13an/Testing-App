@@ -2,6 +2,13 @@
   background: #fff;
 }
 
+.ant-layout-content {
+  @media (max-width: 600px) {
+    padding: 0 !important;
+    margin-top: 70px !important;
+  }
+}
+
 .site-layout-background {
   position: relative;
 }
