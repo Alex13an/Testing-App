@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { ICategory } from '../../models/appModels'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined } from '@ant-design/icons'

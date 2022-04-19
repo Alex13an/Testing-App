@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import './home.scss'
-import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons'
 import TestCard from './../../components/testCard/TestCard'
 import { testsApi } from '../../store/services/TestsApi'
 import { categoryApi } from '../../store/services/CategoryApi'

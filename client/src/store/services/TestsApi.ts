@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ITest, ITestCreate, ITestFull, ITests } from '../../models/appModels'
 import { RootState } from '..'
-import { SortTestParams, TestParams } from '../../models/fetchModels'
+import { SortTestParams } from '../../models/fetchModels'
 
 export const testsApi = createApi({
   reducerPath: 'testsApi',

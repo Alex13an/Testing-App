@@ -26,7 +26,8 @@ const User: FC = () => {
     <div className="passed-test">
       <Title level={2}>Пройденные тесты</Title>
       <Paragraph>
-        <Collapse bordered={false}
+        <Collapse
+          bordered={false}
           expandIconPosition="right"
           expandIcon={({ isActive }) => <LeftOutlined rotate={isActive ? -90 : 0} />}
         >
