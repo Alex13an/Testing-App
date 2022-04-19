@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { ICategory } from '../../models/appModels'
 import { Menu, Dropdown } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
@@ -23,6 +23,12 @@ const CategorySelector: FC<CategorySelectorProps> = ({
     setCatId(key)
   }
 
+  const getCategory = () => {
+    let name = categories.find(cat => cat.id == catId)?.name
+    if (!name) name = 'Все тесты'
+    return name
+  }
+
   const catMenu = (
     <Menu onClick={catClick}>
       {first && (
@@ -40,7 +46,7 @@ const CategorySelector: FC<CategorySelectorProps> = ({
   return (
     <Dropdown overlay={catMenu}>
       <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-        {catName ? `${categories.find(cat => cat.id == catId)?.name}` : 'Категория'}
+        {catName ? getCategory() : 'Категория'}
         <DownOutlined />
       </a>
     </Dropdown>

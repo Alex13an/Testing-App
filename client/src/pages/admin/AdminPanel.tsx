@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import './adminPanel.scss'
 import { Input, InputNumber, Button } from 'antd'
 import { categoryApi } from '../../store/services/CategoryApi'
@@ -23,6 +23,15 @@ const AdminPanel: FC = () => {
   const [currentResult, setCurrentResult] = useState('')
   const [currentResultBreach, setCurrentResultBreach] = useState(1)
   const [createTest, {}] = testsApi.useCreateTestMutation()
+  const [totalScore, setTotalScore] = useState(0)
+
+  useEffect(() => {
+    let total = 0
+    questions.forEach(q => {
+      total += 7 * q.scale
+    })
+    setTotalScore(total)
+  }, [questions])
 
   const deleteQuestion = (body: string) => {
     setQuestions(prev => prev.filter(q => q.body !== body))
@@ -122,9 +131,10 @@ const AdminPanel: FC = () => {
               Добавить
             </Button>
           </div>
+          <br />
           <h3>Добавить результат</h3>
           <div className="test-create__test-content test-create__test-content_text">
-            <div>
+            <div className="test-create__breach">
               <h4>Порог</h4>
               <InputNumber
                 min={1}
@@ -133,9 +143,10 @@ const AdminPanel: FC = () => {
                 value={currentResultBreach}
                 onChange={value => setCurrentResultBreach(value)}
               />
-              <Button type="primary" onClick={addResult}>
-                Добавить
-              </Button>
+              <div className="test-create__breach-info">
+                <div>Максимум баллов: {totalScore}</div>
+                <div>Минимум баллов: {questions.length}</div>
+              </div>
             </div>
             <TextArea
               placeholder="Результат"
@@ -144,6 +155,9 @@ const AdminPanel: FC = () => {
               value={currentResult}
               onChange={e => setCurrentResult(e.target.value)}
             />
+            <Button type="primary" onClick={addResult}>
+              Добавить
+            </Button>
           </div>
         </div>
         <div className="test-create__content">

@@ -12,7 +12,12 @@ const { Title, Paragraph } = Typography
 
 const User: FC = () => {
   const { userId } = useAppSelector(state => state.RootReducer.authSlice)
-  const { data, isLoading } = passedTestsApi.useGetAllPassedTestsQuery({ userId })
+  const { data, isLoading } = passedTestsApi.useGetAllPassedTestsQuery(
+    { userId },
+    {
+      refetchOnFocus: true,
+    },
+  )
   const { isLoading: catLoading, data: categories } = categoryApi.useFetchAllCategoriesQuery(null)
 
   if (isLoading || catLoading) return <Loader />
@@ -21,7 +26,7 @@ const User: FC = () => {
     <div className="passed-test">
       <Title level={2}>Пройденные тесты</Title>
       <Paragraph>
-        <Collapse
+        <Collapse bordered={false}
           expandIconPosition="right"
           expandIcon={({ isActive }) => <LeftOutlined rotate={isActive ? -90 : 0} />}
         >
@@ -38,7 +43,8 @@ const User: FC = () => {
                 />
               }
             >
-              <span className="passed-test__result">Результат: </span>{test.result}
+              <span className="passed-test__result">Результат: </span>
+              {test.result}
             </Panel>
           ))}
         </Collapse>

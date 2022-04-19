@@ -7,7 +7,7 @@ module.exports = {
     hot: true,
     open: true,
     historyApiFallback: true,
-    port: 1313,
+    port: 4000,
   },
   devtool: 'cheap-module-source-map',
   plugins: [new ReactRefreshWebpackPlugin()],

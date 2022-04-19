@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { ITest, ITestCreate, ITestFull, ITests } from '../../models/appModels'
 import { RootState } from '..'
-import { TestParams } from '../../models/fetchModels'
+import { SortTestParams, TestParams } from '../../models/fetchModels'
 
 export const testsApi = createApi({
   reducerPath: 'testsApi',
@@ -18,11 +18,13 @@ export const testsApi = createApi({
     },
   }),
   endpoints: build => ({
-    fetchAllTests: build.query<ITests, TestParams>({
-      query: ({ categoryId, limit, page }) => ({
+    fetchAllTests: build.query<ITests, SortTestParams>({
+      query: ({ categoryId, sort, sortType, limit, page }) => ({
         url: '/',
         params: {
           categoryId,
+          sort,
+          sortType,
           limit,
           page,
         },

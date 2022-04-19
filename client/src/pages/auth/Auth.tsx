@@ -28,7 +28,7 @@ const Auth: FC = () => {
       if (mode === 'login') {
         response = await userLogin({ email: values.email, password: values.password }).unwrap()
       } else {
-        response = await userReg({ email: values.email, password: values.password }).unwrap()
+        response = await userReg({ email: values.email, password: values.password, role: 'USER' }).unwrap()
       }
       if (response.token) {
         const decodedUser: { role: 'USER' | 'ADMIN'; id: number } = decode(response.token) || {

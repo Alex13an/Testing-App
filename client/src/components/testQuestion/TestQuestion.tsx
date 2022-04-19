@@ -42,7 +42,7 @@ const TestQuestion: FC<TestQuesionProps> = ({ body, updateScore, scrollRef, ques
     >
       <h3>{body}</h3>
       <div className="test-question__circles">
-        <span className="test-question__less">Несогласен</span>
+        <span className="test-question__less">Нет</span>
         {circleArr.map(circle => (
           <div
             className={`test-question__circle ${getCircle(circle)}`}
@@ -52,7 +52,7 @@ const TestQuestion: FC<TestQuesionProps> = ({ body, updateScore, scrollRef, ques
             {circle === activeResult && <CheckOutlined />}
           </div>
         ))}
-        <span className="test-question__more">Согласен</span>
+        <span className="test-question__more">Да</span>
       </div>
       <Divider />
     </div>

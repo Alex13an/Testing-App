@@ -61,6 +61,16 @@
     cursor: pointer;
     font-size: 18px;
   }
+  &__breach {
+    width: 100%;
+    display: flex;
+  }
+  &__breach-info {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-left: 15px;
+  }
 }
 
 .add-test {
@@ -70,4 +80,5 @@
   padding: 15px;
   color: #ffffff;
   cursor: pointer;
+  margin-top: 40px;
 }

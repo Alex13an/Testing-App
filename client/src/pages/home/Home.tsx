@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react'
 import './home.scss'
-import { Menu, Dropdown, message } from 'antd'
-import { DownOutlined, UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons'
+import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons'
 import TestCard from './../../components/testCard/TestCard'
 import { testsApi } from '../../store/services/TestsApi'
 import { categoryApi } from '../../store/services/CategoryApi'
-import { TestParams } from '../../models/fetchModels'
+import { ISort, ISortType, TestParams } from '../../models/fetchModels'
 import CategorySelector from './../../components/categorySelector/CategorySelector'
 import Loader from '../../components/loader/Loader'
 import { useAppSelector } from '../../hooks/storeHooks'
 import { passedTestsApi } from '../../store/services/PassedTestsApi'
+import SortSelector from '../../components/sortSelector/SortSelector'
 
 const Home: FC = () => {
   const { userId } = useAppSelector(state => state.RootReducer.authSlice)
@@ -18,8 +18,11 @@ const Home: FC = () => {
     page: undefined,
   })
   const [categoryId, setCategoryId] = useState<number | undefined>(undefined)
+  const [sort, setSort] = useState<{ name: ISort; type: ISortType }>({ name: 'id', type: 'DESC' })
   const { isLoading, data: tests } = testsApi.useFetchAllTestsQuery({
     categoryId,
+    sort: sort.name,
+    sortType: sort.type,
     limit: testParams.limit,
     page: testParams.page,
   })
@@ -27,17 +30,6 @@ const Home: FC = () => {
   const { data: passedTests, isLoading: passedLoading } = passedTestsApi.useFetchPassedTestQuery({
     userId,
   })
-
-  const onClick = () => {
-    message.info(`Click on item key`)
-  }
-  const menu = (
-    <Menu onClick={onClick}>
-      <Menu.Item key="1">1st menu item</Menu.Item>
-      <Menu.Item key="2">2nd menu item</Menu.Item>
-      <Menu.Item key="3">3rd menu item</Menu.Item>
-    </Menu>
-  )
 
   if (isLoading || catLoading || passedLoading) return <Loader />
 
@@ -47,23 +39,14 @@ const Home: FC = () => {
       <span className="tests__subheader">психологические, образовательные, smart, IQ</span>
       <div className="tests__settings">
         <div className="tests__filters">
-          <Dropdown overlay={menu}>
-            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-              Фильтр <DownOutlined />
-            </a>
-          </Dropdown>
-          <Dropdown overlay={menu}>
-            <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-              Сортировка <DownOutlined />
-            </a>
-          </Dropdown>
           <CategorySelector
             first
             categories={categories || []}
             setCatId={setCategoryId}
             catId={categoryId}
-            catName={false}
+            catName={true}
           />
+          <SortSelector sort={sort} setSort={setSort} />
         </div>
         <div className="tests__view-switchers">
           <a className="tests__view test__view_list">

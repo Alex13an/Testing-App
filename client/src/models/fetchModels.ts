@@ -1,8 +1,24 @@
+export type ISort = 'id' | 'title'
+
+export type ISortType = 'ASC' | 'DESC'
+
 export interface TestParams {
   categoryId?: number
   limit?: number
   page?: number
 }
+
+export type SortTestParams = TestParams &
+  (
+    | {
+        sort?: never
+        sortType?: never
+      }
+    | {
+        sort: ISort
+        sortType: ISortType
+      }
+  )
 
 export interface PassedTest {
   testId: number
