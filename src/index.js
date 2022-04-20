@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 app.use(errorHandling)
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build'))
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
 
 const start = async () => {
