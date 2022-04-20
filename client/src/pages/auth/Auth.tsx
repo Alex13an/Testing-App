@@ -76,18 +76,21 @@ const Auth: FC = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <h2 className="login-header">{mode === 'login' ? 'Sign in' : 'Sign Up'}</h2>
-        <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
+        <h2 className="login-header">{mode === 'login' ? 'Вход' : 'Регистрация'}</h2>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: 'Пожалуйста введите свой email' }]}
+        >
           <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
         </Form.Item>
         <Form.Item
           name="password"
-          rules={[{ required: true, message: 'Please input your Password!' }]}
+          rules={[{ required: true, message: 'Пожалуйста введите пароль' }]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
-            placeholder="Password"
+            placeholder="Пароль"
           />
         </Form.Item>
 
@@ -98,11 +101,10 @@ const Auth: FC = () => {
             className="login-form-button"
             loading={buttonLoading}
           >
-            {mode === 'login' ? 'Sign in' : 'Sign Up'}
-          </Button>
-          Or{' '}
+            {mode === 'login' ? 'Вход' : 'Регистрация'}
+          </Button>{' '}
           <Link to={mode === 'login' ? '/auth?auth=register' : '/auth?auth=login'}>
-            {mode === 'login' ? 'sign up now!' : 'sign in now!'}
+            {mode === 'login' ? 'Войти' : 'Зарегестрироваться'}
           </Link>
         </Form.Item>
       </Form>
