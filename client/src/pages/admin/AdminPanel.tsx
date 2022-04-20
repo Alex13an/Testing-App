@@ -12,9 +12,7 @@ const { TextArea } = Input
 const AdminPanel: FC = () => {
   const [categoryId, setcategoryId] = useState<number | undefined>(1)
   const { isLoading: catLoading, data: categories } = categoryApi.useFetchAllCategoriesQuery(null)
-  const [questions, setQuestions] = useState<IQuestion[]>([
-    { body: 'Что сосут чемпионы?', scale: 1 },
-  ])
+  const [questions, setQuestions] = useState<IQuestion[]>([{ body: 'Первый вопрос', scale: 1 }])
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [results, setResults] = useState<IResult[]>([])
