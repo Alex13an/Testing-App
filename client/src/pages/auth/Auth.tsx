@@ -102,9 +102,10 @@ const Auth: FC = () => {
             loading={buttonLoading}
           >
             {mode === 'login' ? 'Вход' : 'Регистрация'}
-          </Button>{' '}
+          </Button>
+          Или{' '}
           <Link to={mode === 'login' ? '/auth?auth=register' : '/auth?auth=login'}>
-            {mode === 'login' ? 'Войти' : 'Зарегестрироваться'}
+            {mode === 'login' ? 'Зарегестрироваться' : 'Войти'}
           </Link>
         </Form.Item>
       </Form>
