@@ -5,8 +5,14 @@
   "repository": "https://github.com/Alex13an/Testing-App.git",
   "author": "Alexandr An <alexandr13an@yandex.ru>",
   "license": "MIT",
+  "private": "true",
+  "engines": {
+    "node": "16.14.2"
+  },
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node index.js",
+    "heroku-postbuild": "cd client && yarn install && yarn build"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

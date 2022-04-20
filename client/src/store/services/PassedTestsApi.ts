@@ -6,7 +6,7 @@ export const passedTestsApi = createApi({
   reducerPath: 'passedTestsApi',
   tagTypes: ['passed'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/passed',
+    baseUrl: 'api/passed',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).RootReducer.authSlice.token
 

@@ -6,7 +6,7 @@ import { SortTestParams } from '../../models/fetchModels'
 export const testsApi = createApi({
   reducerPath: 'testsApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/test',
+    baseUrl: 'api/test',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).RootReducer.authSlice.token
 

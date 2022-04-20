@@ -2,9 +2,9 @@ require('dotenv').config()
 const express = require('express')
 const sequelize = require('./db/db')
 const cors = require('cors')
-const models = require('./models/models')
 const router = require('./routes/index')
 const errorHandling = require('./middleware/ErrorHandling.middleware')
+const path = require('path')
 
 const PORT = process.env.PORT || 5000
 
@@ -13,11 +13,11 @@ app.use(cors())
 app.use(express.json())
 app.use('/api', router)
 
-app.use(errorHandling)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')))
+}
 
-app.get('/', (req, res) => {
-  res.status(200).json({message: 'Working!'})
-})
+app.use(errorHandling)
 
 const start = async () => {
   try {

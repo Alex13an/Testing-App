@@ -6,7 +6,7 @@ export const categoryApi = createApi({
   reducerPath: 'categoryApi',
   tagTypes: ['Category'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/category',
+    baseUrl: 'api/category',
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).RootReducer.authSlice.token
 
