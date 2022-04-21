@@ -91,7 +91,13 @@ class TestController {
         [sort, sortType],
       ]})
     }
-    const totalTests = await Test.count()
+
+    let totalTests
+    if(categoryId) {
+      totalTests = await Test.count({where: {categoryId}})
+    } else {
+      totalTests = await Test.count()
+    }
 
     return res.json({...tests, total: totalTests / limit})
   }

@@ -25,8 +25,11 @@ const Home: FC = () => {
   const limit = useRef<number>(5)
   const lastElement = useRef<HTMLDivElement>(null)
   const observer = useRef<IntersectionObserver>()
+  const isReset = useRef<boolean>(false)
 
   useEffect(() => {
+    page.current = 1
+    isReset.current = true
     getTests({
       sort: sort.name,
       categoryId,
@@ -34,11 +37,16 @@ const Home: FC = () => {
       limit: limit.current,
       page: page.current,
     })
-  }, [])
+  }, [sort, categoryId])
 
   useEffect(() => {
     if (!isSuccess || !tests || isLoading) return
-    setCurrentTests(prev => [...prev, ...tests.rows])
+    if (isReset.current) {
+      isReset.current = false
+      setCurrentTests([...tests.rows])
+    } else {
+      setCurrentTests(prev => [...prev, ...tests.rows])
+    }
 
     if (observer.current) observer.current.disconnect()
     const callback = (entries: IntersectionObserverEntry[]) => {
