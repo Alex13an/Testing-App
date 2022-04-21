@@ -4,8 +4,8 @@ export type ISortType = 'ASC' | 'DESC'
 
 export interface TestParams {
   categoryId?: number
-  limit?: number
-  page?: number
+  limit: number
+  page: number
 }
 
 export type SortTestParams = TestParams &
