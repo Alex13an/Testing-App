@@ -40,6 +40,7 @@ export interface ITestCreate {
 export interface ITests {
   counts: number
   rows: ITest[]
+  total?: number
 }
 
 export interface ICategory {

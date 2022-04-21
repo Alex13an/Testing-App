@@ -91,8 +91,9 @@ class TestController {
         [sort, sortType],
       ]})
     }
+    const totalTests = await Test.count()
 
-    return res.json(tests)
+    return res.json({...tests, total: totalTests / limit})
   }
 
   async getOne(req, res) {
