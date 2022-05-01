@@ -35,4 +35,15 @@
   &__view-switchers {
     padding: 0 5px;
   }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    &_cards {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      justify-items: center;
+      row-gap: 20px;
+    }
+  }
 }
