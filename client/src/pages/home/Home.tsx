@@ -83,10 +83,16 @@ const Home: FC = () => {
           <SortSelector sort={sort} setSort={setSort} />
         </div>
         <div className="tests__view-switchers">
-          <a className="tests__view test__view_list" onClick={() => setTemplate(0)}>
+          <a
+            className={`tests__view test__view_list ${!template && 'tests__view_active'}`}
+            onClick={() => setTemplate(0)}
+          >
             <UnorderedListOutlined />
           </a>
-          <a className="tests__view test__view_tiles" onClick={() => setTemplate(1)}>
+          <a
+            className={`tests__view test__view_tiles ${template && 'tests__view_active'}`}
+            onClick={() => setTemplate(1)}
+          >
             <AppstoreOutlined />
           </a>
         </div>
