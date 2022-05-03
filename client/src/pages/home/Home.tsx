@@ -10,6 +10,7 @@ import { useAppSelector } from '../../hooks/storeHooks'
 import { passedTestsApi } from '../../store/services/PassedTestsApi'
 import SortSelector from '../../components/sortSelector/SortSelector'
 import { ITest } from '../../models/appModels'
+import { UnorderedListOutlined, AppstoreOutlined } from '@ant-design/icons'
 
 const Home: FC = () => {
   const { userId } = useAppSelector(state => state.RootReducer.authSlice)
@@ -21,6 +22,7 @@ const Home: FC = () => {
   const { data: passedTests, isLoading: passedLoading } = passedTestsApi.useFetchPassedTestQuery({
     userId,
   })
+  const [template, setTemplate] = useState<number>(0)
   const page = useRef<number>(1)
   const limit = useRef<number>(5)
   const lastElement = useRef<HTMLDivElement>(null)
@@ -80,16 +82,22 @@ const Home: FC = () => {
           />
           <SortSelector sort={sort} setSort={setSort} />
         </div>
-        {/* <div className="tests__view-switchers"> */}
-        {/*   <a className="tests__view test__view_list"> */}
-        {/*     <UnorderedListOutlined /> */}
-        {/*   </a> */}
-        {/*   <a className="tests__view test__view_tiles"> */}
-        {/*     <AppstoreOutlined /> */}
-        {/*   </a> */}
-        {/* </div> */}
+        <div className="tests__view-switchers">
+          <a
+            className={`tests__view test__view_list ${!template && 'tests__view_active'}`}
+            onClick={() => setTemplate(0)}
+          >
+            <UnorderedListOutlined />
+          </a>
+          <a
+            className={`tests__view test__view_tiles ${template && 'tests__view_active'}`}
+            onClick={() => setTemplate(1)}
+          >
+            <AppstoreOutlined />
+          </a>
+        </div>
       </div>
-      <div className="tests__list">
+      <div className={`tests__list ${template && 'tests__list_cards'}`}>
         {currentTests &&
           currentTests.map(test => (
             <TestCard
@@ -101,6 +109,7 @@ const Home: FC = () => {
               rating={test.rating}
               title={test.title}
               passed={passedTests?.userTests.some(t => t.testId === test.id) || false}
+              type={template}
             />
           ))}
         <div ref={lastElement} style={{ height: '5px' }}></div>
